@@ -3,7 +3,7 @@ import { Form, Input, message, Modal, Select } from "antd";
 import Spinner from "./Spinner";
 import axios from "axios";
 
-function UserType({
+function UserTypeModal({
   setShowAddEditUserTypeModal,
   showAddEditUserTypeModal,
   selectedItemForEdit,
@@ -25,7 +25,7 @@ function UserType({
         getUserTypes();
         message.success("UserType Updated successfully");
       } else {
-        await axios.post("/api/UserTypes/add-UserType", {
+        await axios.post("/api/userType/createUserType", {
           ...values,
           userid: user._id,
         });
@@ -68,4 +68,4 @@ function UserType({
   );
 }
 
-export default UserType;
+export default UserTypeModal;

@@ -4,8 +4,13 @@ const app = express()
 app.use(express.json())
 const path = require('path')
 const userRoute = require('./routes/usersRoute')
+const userTypeRoute = require('./routes/userTypeRoute')
+
 const transactionsRoute = require('./routes/transactionsRoute')
 app.use('/api/users/' , userRoute)
+app.use('/api/userType/' , userTypeRoute)
+
+
 app.use('/api/transactions/' , transactionsRoute)
 
 const port =process.env.PORT || 5000

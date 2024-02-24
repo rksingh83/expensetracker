@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Test from "./pages/Test";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import MyUsers from "./pages/MyUsers";
 
 function App() {
   return (
@@ -26,6 +27,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Test />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path="/manageMyUsers"
+            element={
+              <ProtectedRoute>
+                <MyUsers />
               </ProtectedRoute>
             }
           />
