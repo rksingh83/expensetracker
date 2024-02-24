@@ -13,14 +13,14 @@ function AddEditTransaction({
   const [loading, setLoading] = useState(false);
   const onFinish = async (values) => {
     try {
-      const user = JSON.parse(localStorage.getItem("sheymoney-udemy-user"));
+      const user = JSON.parse(localStorage.getItem("loggedInUser"));
       setLoading(true);
       if (selectedItemForEdit) {
         await axios.post("/api/transactions/edit-transaction", {
-           payload : {
+          payload: {
             ...values,
             userid: user._id,
-           },
+          },
           transactionId: selectedItemForEdit._id,
         });
         getTransactions();

@@ -22,7 +22,7 @@ function Register() {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("sheymoney-udemy-user")) {
+    if (localStorage.getItem("loggedInUser")) {
       navigate("/");
     }
   }, []);
@@ -45,7 +45,7 @@ function Register() {
         <div className="col-md-4">
           <Form layout="vertical" onFinish={onFinish}>
             <h1>REGISTER</h1>
-           
+
             <Form.Item label="Name" name="name">
               <Input />
             </Form.Item>

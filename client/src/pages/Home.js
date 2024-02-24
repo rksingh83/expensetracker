@@ -26,7 +26,7 @@ function Home() {
   const [viewType, setViewType] = useState("table");
   const getTransactions = async () => {
     try {
-      const user = JSON.parse(localStorage.getItem("sheymoney-udemy-user"));
+      const user = JSON.parse(localStorage.getItem("loggedInUser"));
 
       setLoading(true);
       const response = await axios.post(
@@ -98,7 +98,10 @@ function Home() {
                 setShowAddEditTransactionModal(true);
               }}
             />
-            <DeleteOutlined className="mx-3" onClick={()=>deleteTransaction(record)}/>
+            <DeleteOutlined
+              className="mx-3"
+              onClick={() => deleteTransaction(record)}
+            />
           </div>
         );
       },

@@ -1,22 +1,26 @@
 import React from "react";
 import { Menu, Dropdown, Button, Space } from "antd";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 import "../resources/default-layout.css";
 function DefaultLayout(props) {
-  const user = JSON.parse(localStorage.getItem("sheymoney-udemy-user"));
-  const navigate = useNavigate()
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+  const navigate = useNavigate();
   const menu = (
     <Menu
       items={[
         {
           label: (
-            <li onClick={()=>{
-              localStorage.removeItem('sheymoney-udemy-user')
-              navigate("/login");
-            }}>Logout</li>
+            <li
+              onClick={() => {
+                localStorage.removeItem("loggedInUser");
+                navigate("/login");
+              }}
+            >
+              Logout
+            </li>
           ),
-        }
+        },
       ]}
     />
   );
@@ -25,10 +29,11 @@ function DefaultLayout(props) {
       <div className="header d-flex justify-content-between align-items-center">
         <div>
           <h1 className="logo">SHEY MONEY</h1>
+          <p className="color-white">Create user</p>
         </div>
         <div>
           <Dropdown overlay={menu} placement="bottomLeft">
-            <button className='primary'>{user.name}</button>
+            <button className="primary">{user.name}</button>
           </Dropdown>
         </div>
       </div>

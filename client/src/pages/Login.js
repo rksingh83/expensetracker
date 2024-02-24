@@ -15,7 +15,7 @@ function Login() {
       setLoading(true);
       const response = await axios.post("/api/users/login", values);
       localStorage.setItem(
-        "sheymoney-udemy-user",
+        "loggedInUser",
         JSON.stringify({ ...response.data, password: "" })
       );
       setLoading(false);
@@ -28,7 +28,7 @@ function Login() {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("sheymoney-udemy-user")) {
+    if (localStorage.getItem("loggedInUser")) {
       navigate("/");
     }
   }, []);
@@ -40,7 +40,6 @@ function Login() {
         <div className="col-md-4">
           <Form layout="vertical" onFinish={onFinish}>
             <h1>Login</h1>
-    
 
             <Form.Item label="Email" name="email">
               <Input />

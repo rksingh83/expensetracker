@@ -29,5 +29,10 @@ router.post("/register", async function (req, res) {
     }
   });
 
+  router.get("/", async function (req, res) {
+      res.status(200).json({"welcome": "Welcome"})
+  });
 
-  module.exports = router;
+
+
+module.exports = router;
