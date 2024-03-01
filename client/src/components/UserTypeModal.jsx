@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, message, Modal, Select } from "antd";
 import Spinner from "./Spinner";
-import axios from "axios";
+import { createUserType } from "../service";
 
 function UserTypeModal({
   setShowAddEditUserTypeModal,
@@ -13,25 +13,11 @@ function UserTypeModal({
   const [loading, setLoading] = useState(false);
   const onFinish = async (values) => {
     try {
-      const user = JSON.parse(localStorage.getItem("loggedInUser"));
       setLoading(true);
-      if (selectedItemForEdit) {
-        await axios.post("/api/UserTypes/edit-UserType", {
-          payload: {
-            ...values,
-            createdBy: user._id,
-          },
-        });
-        getUserTypes();
-        message.success("UserType Updated successfully");
-      } else {
-        await axios.post("/api/userType/createUserType", {
-          ...values,
-          userid: user._id,
-        });
+     
+       await createUserType(values)
         getUserTypes();
         message.success("UserType added successfully");
-      }
       setShowAddEditUserTypeModal(false);
       setSelectedItemForEdit(null);
       setLoading(false);

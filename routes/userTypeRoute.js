@@ -12,11 +12,9 @@ router.post("/createUserType", async function (req, res) {
     }
   });
 
-  router.post("/getUserTypes", async (req, res) => {
-    const { frequency, selectedRange , type } = req.body;
+  router.get("/getUserTypes", async (req, res) => {
     try {
       const userTypes = await UserType.find();
-  
       res.send(userTypes);
     } catch (error) {
       res.status(500).json(error);

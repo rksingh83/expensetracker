@@ -5,15 +5,16 @@ app.use(express.json())
 const path = require('path')
 const userRoute = require('./routes/usersRoute')
 const userTypeRoute = require('./routes/userTypeRoute')
+const myUserRoute = require('./routes/myUsersRoute')
+
 
 const transactionsRoute = require('./routes/transactionsRoute')
 app.use('/api/users/' , userRoute)
 app.use('/api/userType/' , userTypeRoute)
-
-
+app.use('/api/myUser/' , myUserRoute)
 app.use('/api/transactions/' , transactionsRoute)
 
-const port =process.env.PORT || 5000
+const port =process.env.PORT || 6000
 
 if(process.env.NODE_ENV === 'production')
 {
