@@ -62,7 +62,7 @@ const UserTypes = () => {
       />
        <MyUsersModal
         showAddEditMyUsersModal={isOpenMyUserModal}
-        setShowAddEditUserTypeModal={setIsMyUserModal}
+        setShowAddEditMyUsersModal={setIsMyUserModal}
         userTypeList={userTypes}
       />
     </div>

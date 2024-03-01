@@ -13,6 +13,7 @@ import {
 } from "@ant-design/icons";
 import moment from "moment";
 import Analatics from "../components/Analatics";
+import { fetchUserList } from "./MyUsers";
 const { RangePicker } = DatePicker;
 function Home() {
   const [showAddEditTransactionModal, setShowAddEditTransactionModal] =
@@ -22,6 +23,8 @@ function Home() {
   const [transactionsData, setTransactionsData] = useState([]);
   const [frequency, setFrequency] = useState("7");
   const [type, setType] = useState("all");
+  const [userType, setUserType] = useState([])
+  const [userList, setUserList] = useState([])
   const [selectedRange, setSelectedRange] = useState([]);
   const [viewType, setViewType] = useState("table");
   const getTransactions = async () => {
@@ -63,6 +66,11 @@ function Home() {
   useEffect(() => {
     getTransactions();
   }, [frequency, selectedRange, type]);
+  
+
+  useEffect(()=>{
+    fetchUserList(setUserList)
+  },[])
 
   const columns = [
     {
@@ -186,6 +194,7 @@ function Home() {
           selectedItemForEdit={selectedItemForEdit}
           getTransactions={getTransactions}
           setSelectedItemForEdit={setSelectedItemForEdit}
+          userList = {userList}
         />
       )}
     </DefaultLayout>

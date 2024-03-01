@@ -3,22 +3,36 @@ import { Form, Input, message, Modal, Select } from "antd";
 import Spinner from "./Spinner";
 import axios from "axios";
 
+
+const getUserDetails = (userId, list = [])=>{
+    for(let i = 0; i < list.length; i++){
+        if(list[i]._id === userId){
+            return list[i];
+        }
+    }
+     
+}
 function AddEditTransaction({
   setShowAddEditTransactionModal,
   showAddEditTransactionModal,
   selectedItemForEdit,
   setSelectedItemForEdit,
   getTransactions,
+  userList,
 }) {
+
   const [loading, setLoading] = useState(false);
   const onFinish = async (values) => {
     try {
       const user = JSON.parse(localStorage.getItem("loggedInUser"));
       setLoading(true);
+      const {name, userType, _id} = getUserDetails(values?.userId, userList)
+      const request = {...values,userName:name, category:userType, attachedUserId:_id }
+      
       if (selectedItemForEdit) {
         await axios.post("/api/transactions/edit-transaction", {
           payload: {
-            ...values,
+            ...request,
             userid: user._id,
           },
           transactionId: selectedItemForEdit._id,
@@ -26,8 +40,9 @@ function AddEditTransaction({
         getTransactions();
         message.success("Transaction Updated successfully");
       } else {
+
         await axios.post("/api/transactions/add-transaction", {
-          ...values,
+          ...request,
           userid: user._id,
         });
         getTransactions();
@@ -66,21 +81,15 @@ function AddEditTransaction({
           </Select>
         </Form.Item>
 
-        <Form.Item label="Category" name="category">
+        <Form.Item label="Category" name="userId">
           <Select>
-            {" "}
-            <Select.Option value="salary">Salary</Select.Option>
-            <Select.Option value="freelance">Freelance</Select.Option>
-            <Select.Option value="food">Food</Select.Option>
-            <Select.Option value="entertainment">Entertainment</Select.Option>
-            <Select.Option value="investment">Investment</Select.Option>
-            <Select.Option value="travel">Travel</Select.Option>
-            <Select.Option value="education">Education</Select.Option>
-            <Select.Option value="medical">Medical</Select.Option>
-            <Select.Option value="tax">Tax</Select.Option>
+            {userList?.map((user) => (
+              <Select.Option key={user?._id} value={user?._id}>
+                {user.name}
+              </Select.Option>
+            ))}
           </Select>
         </Form.Item>
-
         <Form.Item label="Date" name="date">
           <Input type="date" />
         </Form.Item>
